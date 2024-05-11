@@ -43,7 +43,7 @@ public class PainelDesenho2 extends JPanel {
   }	 
   
 	public void aoPressionarMouse(MouseEvent event) {
-    mostra = false;
+    mostra = false; // o código do desenho não deve ser mostrado
     x1 = event.getX();
     y1 = event.getY();
     x2 = event.getX();
@@ -51,65 +51,65 @@ public class PainelDesenho2 extends JPanel {
   }
 
 	public void aoSoltarMouse(MouseEvent event) {
-    mostra = true;
+    mostra = true; //define que o código do desenho deve ser mostrado
     x2 = event.getX();
     y2 = event.getY();
-    desenhoFixo();
+    desenhoFixo(); //adiciona o novo desenho à lista de desenhos anteriores
     repaint();
   }
   
-	public void aoArrastarMouse(MouseEvent event) {
+	public void aoArrastarMouse(MouseEvent event) { //atualiza a coordenada das variáveis do novo desenho durante o arrasto
 		x2 = event.getX();
 		y2 = event.getY();
-		if (forma == 1) {
+		if (forma == 1) { //se for forma livre, desenha o novo desenho em tempo real
 			desenhoFixo();
 		}
-	 	repaint();
+	 	repaint(); //redesenha o painel
   }
 
-  public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		g.setColor(cor);
+  public void paintComponent(Graphics g){ 
+  super.paintComponent(g);//chama o método paintComponent da clsse pai
+		g.setColor(cor); //define a cor do desenho
 		switch (forma) {
 		 case 0:
 		   apagar();
 		   break;
 		 case 1:
-		   g.drawLine(x2, y2, x2, y2);
-		   System.out.println("g.drawLine(" + x2 + ", " + y2 + ", " + x2 + ", " + y2 + ");");
+		   g.drawLine(x2, y2, x2, y2); //desenha um ponto (desenho livre)
+		   System.out.println("g.drawLine(" + x2 + ", " + y2 + ", " + x2 + ", " + y2 + ");"); //mostra o código do desenho
 		   break;   
 		 case 2:
-		   g.drawLine(x1, y1, x2, y2);
+		   g.drawLine(x1, y1, x2, y2); //desenha linha
 		   if (mostra)
 		     System.out.println("g.drawLine(" + x1 + ", " + y1 + ", " + x2 + ", " + y2 + ");");
 		   break;   
 		 case 3:
-		   g.fillRect(x1, y1, x2-x1, y2-y1);
+		   g.fillRect(x1, y1, x2-x1, y2-y1); //retangulo cheio
 		   if (mostra)
 		     System.out.println("g.fillRect(" + x1 + ", " + y1 + ", " + (x2-x1) + ", " + (y2-y1) + ");");
 		   break;   
 		 case 4:
-		   g.drawRect(x1, y1, x2-x1, y2-y1);    
+		   g.drawRect(x1, y1, x2-x1, y2-y1);    //retangulo vazio
 		   if (mostra)
 		     System.out.println("g.drawRect(" + x1 + ", " + y1 + ", " + (x2-x1) + ", " + (y2-y1) + ");");
 		   break;   
 		 case 5:
-		   g.fillOval(x1,y1, x2-x1, y2-y1);
+		   g.fillOval(x1,y1, x2-x1, y2-y1); //circulo cheio
 		   if (mostra)
 		     System.out.println("g.fillOval(" + x1 + ", " + y1 + ", " + (x2-x1) + ", " + (y2-y1) + ");");
 		   break;   
 		 case 6:
-		   g.drawOval(x1,y1, x2-x1, y2-y1);
+		   g.drawOval(x1,y1, x2-x1, y2-y1); //circulo vazio
 		   if (mostra)
 		     System.out.println("g.drawOval(" + x1 + ", " + y1 + ", " + (x2-x1) + ", " + (y2-y1) + ");");
 		   break;   
 		 case 7:
-		   g.fillRoundRect(x1,y1, x2-x1, y2-y1, 25, 25);
+		   g.fillRoundRect(x1,y1, x2-x1, y2-y1, 25, 25); //retangulo arredondado cheio
 		   if (mostra)
 		     System.out.println("g.fillRoundRect(" + x1 + ", " + y1 + ", " + (x2-x1) + ", " + (y2-y1) + ", 25, 25);");
 		   break;  
 		 case 8:
-		   g.drawRoundRect(x1,y1, x2-x1, y2-y1, 25, 25);
+		   g.drawRoundRect(x1,y1, x2-x1, y2-y1, 25, 25); //retangulo arredondado vazio
 		   if (mostra)
 		     System.out.println("g.drawRoundRect(" + x1 + ", " + y1 + ", " + (x2-x1) + ", " + (y2-y1) + ", 25, 25);");
 			 break;
@@ -148,7 +148,7 @@ public class PainelDesenho2 extends JPanel {
 		}
   }
   
-  private void desenhoFixo() {
+  private void desenhoFixo() { //método para atualizar as coordenadas, cores e formas do desenho
     int tp[];
     Color tpC[];
     ax1[ax1.length-1] = x1;
@@ -257,3 +257,4 @@ public class PainelDesenho2 extends JPanel {
      aCor = new Color[1];
   }
 }
+
